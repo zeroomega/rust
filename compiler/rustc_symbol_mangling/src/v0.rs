@@ -85,10 +85,10 @@ pub fn mangle_internal_symbol<'tcx>(tcx: TyCtxt<'tcx>, item_name: &str) -> Strin
     if item_name == "rust_eh_personality" {
         // rust_eh_personality must not be renamed as LLVM hard-codes the name
         return "rust_eh_personality".to_owned();
-    } else if item_name == "__rust_no_alloc_shim_is_unstable" {
+    } else if item_name == "__rust_no_alloc_shim_is_unstable_v2" {
         // Temporary back compat hack to give people the chance to migrate to
         // include #[rustc_std_internal_symbol].
-        return "__rust_no_alloc_shim_is_unstable".to_owned();
+        return "__rust_no_alloc_shim_is_unstable_v2".to_owned();
     }
 
     let prefix = "_R";

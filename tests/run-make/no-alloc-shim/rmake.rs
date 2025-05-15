@@ -38,7 +38,7 @@ fn main() {
         .run();
     run("foo");
 
-    // Check that linking without __rust_no_alloc_shim_is_unstable defined fails
+    // Check that linking without __rust_no_alloc_shim_is_unstable_v2 defined fails
     rustc()
         .input("foo.rs")
         .crate_type("bin")

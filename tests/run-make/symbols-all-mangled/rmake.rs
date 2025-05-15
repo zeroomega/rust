@@ -35,7 +35,7 @@ fn symbols_check_archive(path: &str) {
             continue; // All compiler-builtins symbols must remain unmangled
         }
 
-        if name == "__rust_no_alloc_shim_is_unstable" {
+        if name == "__rust_no_alloc_shim_is_unstable_v2" {
             continue; // FIXME remove exception once we mangle this symbol
         }
 
@@ -75,7 +75,7 @@ fn symbols_check(path: &str) {
             continue;
         }
 
-        if name == "__rust_no_alloc_shim_is_unstable" {
+        if name == "__rust_no_alloc_shim_is_unstable_v2" {
             continue; // FIXME remove exception once we mangle this symbol
         }
 

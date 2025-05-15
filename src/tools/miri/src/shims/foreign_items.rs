@@ -731,6 +731,10 @@ trait EvalContextExtPriv<'tcx>: crate::MiriInterpCxExt<'tcx> {
                 this.mem_copy(ptr_src, ptr_dest, Size::from_bytes(n), true)?;
                 this.write_pointer(ptr_dest, dest)?;
             }
+            "__rust_no_alloc_shim_is_unstable_v2" => {
+                // This is a no-op shim that only exists to prevent making the allocator shims instantly stable.
+                this.check_shim(abi, Conv::Rust, link_name, args)?;
+            }
 
             // math functions (note that there are also intrinsics for some other functions)
             #[rustfmt::skip]
