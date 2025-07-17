@@ -1269,6 +1269,16 @@ impl Builder<'_> {
             if self.link_std_into_rustc_driver(target) { "1" } else { "0" },
         );
 
+        // Crates like openssl will record current timestamp at build time.
+        // The current timestamp can be override by SOURCE_DATE_EPOCH
+        // environment variable.
+        // Pass through SOURCE_DATE_EPOCH environment variable to allow
+        // some crates to be reproducible.
+        let source_date_epoch_env = "SOURCE_DATE_EPOCH";
+        if let Ok(var) = std::env::var(&source_date_epoch_env) {
+            cargo.env(&source_date_epoch_env, &var);
+        }
+
         // When building incrementally we default to a lower ThinLTO import limit
         // (unless explicitly specified otherwise). This will produce a somewhat
         // slower code but give way better compile times.
